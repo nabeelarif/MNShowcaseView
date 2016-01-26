@@ -15,6 +15,9 @@
 		7DD32E8C1BCC24C000C57D7C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DD32E8A1BCC24C000C57D7C /* LaunchScreen.storyboard */; };
 		7DD32E971BCC24C000C57D7C /* MNShowcaseViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD32E961BCC24C000C57D7C /* MNShowcaseViewTests.m */; };
 		7DD32EA21BCC24C000C57D7C /* MNShowcaseViewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD32EA11BCC24C000C57D7C /* MNShowcaseViewUITests.m */; };
+		7DD32EB21BCC382C00C57D7C /* MNShowcaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD32EB11BCC382C00C57D7C /* MNShowcaseView.m */; };
+		7DD32EB51BCC467000C57D7C /* MNShowcaseLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD32EB41BCC467000C57D7C /* MNShowcaseLongPressGestureRecognizer.m */; };
+		7DD32EB81BCC476F00C57D7C /* UIView+MNShowcase.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD32EB71BCC476F00C57D7C /* UIView+MNShowcase.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,12 @@
 		7DD32E9D1BCC24C000C57D7C /* MNShowcaseViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MNShowcaseViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DD32EA11BCC24C000C57D7C /* MNShowcaseViewUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MNShowcaseViewUITests.m; sourceTree = "<group>"; };
 		7DD32EA31BCC24C000C57D7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7DD32EB01BCC382C00C57D7C /* MNShowcaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNShowcaseView.h; sourceTree = "<group>"; };
+		7DD32EB11BCC382C00C57D7C /* MNShowcaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNShowcaseView.m; sourceTree = "<group>"; };
+		7DD32EB31BCC467000C57D7C /* MNShowcaseLongPressGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNShowcaseLongPressGestureRecognizer.h; sourceTree = "<group>"; };
+		7DD32EB41BCC467000C57D7C /* MNShowcaseLongPressGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNShowcaseLongPressGestureRecognizer.m; sourceTree = "<group>"; };
+		7DD32EB61BCC476F00C57D7C /* UIView+MNShowcase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MNShowcase.h"; sourceTree = "<group>"; };
+		7DD32EB71BCC476F00C57D7C /* UIView+MNShowcase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MNShowcase.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +110,7 @@
 		7DD32E7B1BCC24C000C57D7C /* MNShowcaseView */ = {
 			isa = PBXGroup;
 			children = (
+				7DD32EAF1BCC375100C57D7C /* API */,
 				7DD32E7F1BCC24C000C57D7C /* AppDelegate.h */,
 				7DD32E801BCC24C000C57D7C /* AppDelegate.m */,
 				7DD32E821BCC24C000C57D7C /* ViewController.h */,
@@ -138,6 +148,19 @@
 				7DD32EA31BCC24C000C57D7C /* Info.plist */,
 			);
 			path = MNShowcaseViewUITests;
+			sourceTree = "<group>";
+		};
+		7DD32EAF1BCC375100C57D7C /* API */ = {
+			isa = PBXGroup;
+			children = (
+				7DD32EB01BCC382C00C57D7C /* MNShowcaseView.h */,
+				7DD32EB11BCC382C00C57D7C /* MNShowcaseView.m */,
+				7DD32EB31BCC467000C57D7C /* MNShowcaseLongPressGestureRecognizer.h */,
+				7DD32EB41BCC467000C57D7C /* MNShowcaseLongPressGestureRecognizer.m */,
+				7DD32EB61BCC476F00C57D7C /* UIView+MNShowcase.h */,
+				7DD32EB71BCC476F00C57D7C /* UIView+MNShowcase.m */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,10 +226,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0700;
-				ORGANIZATIONNAME = "Advanced Progressive";
+				ORGANIZATIONNAME = "Muhammad Nabeel Arif";
 				TargetAttributes = {
 					7DD32E781BCC24C000C57D7C = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = 9989MK255Q;
 					};
 					7DD32E911BCC24C000C57D7C = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -270,8 +294,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DD32EB51BCC467000C57D7C /* MNShowcaseLongPressGestureRecognizer.m in Sources */,
 				7DD32E841BCC24C000C57D7C /* ViewController.m in Sources */,
+				7DD32EB81BCC476F00C57D7C /* UIView+MNShowcase.m in Sources */,
 				7DD32E811BCC24C000C57D7C /* AppDelegate.m in Sources */,
+				7DD32EB21BCC382C00C57D7C /* MNShowcaseView.m in Sources */,
 				7DD32E7E1BCC24C000C57D7C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -411,6 +438,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = MNShowcaseView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.advancedprogressive.MNShowcaseView;
@@ -422,6 +450,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = MNShowcaseView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.advancedprogressive.MNShowcaseView;
@@ -496,6 +525,7 @@
 				7DD32EA81BCC24C000C57D7C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7DD32EA91BCC24C000C57D7C /* Build configuration list for PBXNativeTarget "MNShowcaseViewTests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +534,7 @@
 				7DD32EAB1BCC24C000C57D7C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7DD32EAC1BCC24C000C57D7C /* Build configuration list for PBXNativeTarget "MNShowcaseViewUITests" */ = {
 			isa = XCConfigurationList;
@@ -512,6 +543,7 @@
 				7DD32EAE1BCC24C000C57D7C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
