@@ -14,6 +14,11 @@
 
 -(void) registerForShowcaseView
 {
+    for (UIGestureRecognizer *gesture in self.gestureRecognizers) {
+        if ([gesture isKindOfClass:[MNShowcaseLongPressGestureRecognizer class]]) {
+            return;
+        }
+    }
     MNShowcaseLongPressGestureRecognizer *longPress = [[MNShowcaseLongPressGestureRecognizer alloc] initWithTarget:self action:@selector(actionDisplayShowCase:)];
     [self addGestureRecognizer:longPress];
 }
@@ -25,10 +30,9 @@
         {
 //            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Gestures" message:@"Long Gesture Detected" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
 //            [alertView show];
-            UIView *container = (UIView*)[UIApplication sharedApplication].keyWindow;
-            CGRect frame = [container convertRect:self.frame fromView:self.superview];
-            MNShowcaseView *overlayView = [[MNShowcaseView alloc] initWithFrame:container.bounds HoleRect:frame backgroundColor:[UIColor colorWithWhite:0.0 alpha:0.6]];
-            [container addSubview:overlayView];
+            MNShowcaseView *overlayView = [[MNShowcaseView alloc] init];
+            [overlayView setArrayViews:@[self]];
+            [overlayView addShowcaseView];
         }
     }
 }

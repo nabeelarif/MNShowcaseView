@@ -18,6 +18,7 @@
 		7DD32EB21BCC382C00C57D7C /* MNShowcaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD32EB11BCC382C00C57D7C /* MNShowcaseView.m */; };
 		7DD32EB51BCC467000C57D7C /* MNShowcaseLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD32EB41BCC467000C57D7C /* MNShowcaseLongPressGestureRecognizer.m */; };
 		7DD32EB81BCC476F00C57D7C /* UIView+MNShowcase.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD32EB71BCC476F00C57D7C /* UIView+MNShowcase.m */; };
+		F4C88C941C577F2300FC1217 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C88C931C577F2300FC1217 /* TableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,8 @@
 		7DD32EB41BCC467000C57D7C /* MNShowcaseLongPressGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNShowcaseLongPressGestureRecognizer.m; sourceTree = "<group>"; };
 		7DD32EB61BCC476F00C57D7C /* UIView+MNShowcase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MNShowcase.h"; sourceTree = "<group>"; };
 		7DD32EB71BCC476F00C57D7C /* UIView+MNShowcase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MNShowcase.m"; sourceTree = "<group>"; };
+		F4C88C921C577F2300FC1217 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		F4C88C931C577F2300FC1217 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +123,8 @@
 				7DD32E8A1BCC24C000C57D7C /* LaunchScreen.storyboard */,
 				7DD32E8D1BCC24C000C57D7C /* Info.plist */,
 				7DD32E7C1BCC24C000C57D7C /* Supporting Files */,
+				F4C88C921C577F2300FC1217 /* TableViewController.h */,
+				F4C88C931C577F2300FC1217 /* TableViewController.m */,
 			);
 			path = MNShowcaseView;
 			sourceTree = "<group>";
@@ -299,6 +304,7 @@
 				7DD32EB81BCC476F00C57D7C /* UIView+MNShowcase.m in Sources */,
 				7DD32E811BCC24C000C57D7C /* AppDelegate.m in Sources */,
 				7DD32EB21BCC382C00C57D7C /* MNShowcaseView.m in Sources */,
+				F4C88C941C577F2300FC1217 /* TableViewController.m in Sources */,
 				7DD32E7E1BCC24C000C57D7C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -440,6 +446,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = MNShowcaseView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.advancedprogressive.MNShowcaseView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -452,6 +459,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = MNShowcaseView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.advancedprogressive.MNShowcaseView;
 				PRODUCT_NAME = "$(TARGET_NAME)";

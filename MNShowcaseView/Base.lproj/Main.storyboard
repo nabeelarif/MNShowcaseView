@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="4vx-7q-HVk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="WOn-Ff-OkG">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
+        <!--Tab Bar Controller-->
+        <scene sceneID="orJ-x2-L1O">
+            <objects>
+                <tabBarController id="WOn-Ff-OkG" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="6Kg-Np-dx3">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="4vx-7q-HVk" kind="relationship" relationship="viewControllers" id="K9n-d4-Wdi"/>
+                        <segue destination="ZRN-8P-Dzn" kind="relationship" relationship="viewControllers" id="FLS-Ql-avU"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bme-Y7-axC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-347" y="13"/>
+        </scene>
         <!--Good One-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -32,15 +51,15 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q6h-Cj-ctQ">
-                                <rect key="frame" x="20" y="562" width="130" height="30"/>
+                                <rect key="frame" x="20" y="513" width="130" height="30"/>
                                 <state key="normal" title="Button One on Left"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TEq-wI-153">
-                                <rect key="frame" x="544" y="562" width="36" height="30"/>
+                                <rect key="frame" x="544" y="513" width="36" height="30"/>
                                 <state key="normal" title="Right"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1op-Be-oDB">
-                                <rect key="frame" x="20" y="472" width="560" height="30"/>
+                                <rect key="frame" x="20" y="423" width="560" height="30"/>
                                 <state key="normal" title="A longer button to see button's Behavior"/>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dVP-hr-6H9">
@@ -77,6 +96,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Save" id="QiI-g7-mBm"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="barBtnSave" destination="QiI-g7-mBm" id="9BD-u6-scQ"/>
                         <outlet property="btnLarge" destination="1op-Be-oDB" id="68s-wR-42g"/>
                         <outlet property="btnLeft" destination="Q6h-Cj-ctQ" id="INS-v3-5o6"/>
                         <outlet property="btnRight" destination="TEq-wI-153" id="MrJ-g6-9mG"/>
@@ -88,12 +108,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="847" y="429"/>
+            <point key="canvasLocation" x="1095" y="-321"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Item-->
         <scene sceneID="wku-HZ-Fd9">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4vx-7q-HVk" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="OgN-Ni-pLZ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Cue-YN-op8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -107,6 +128,92 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YaU-FB-M8e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="353" y="-321"/>
+        </scene>
+        <!--Root View Controller-->
+        <scene sceneID="Vks-AX-gnf">
+            <objects>
+                <tableViewController id="jkW-A5-ddn" customClass="TableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="LyZ-lc-12Q">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <sections>
+                            <tableViewSection id="6I6-8t-Q1s">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="61" id="KSh-Pu-i1B">
+                                        <rect key="frame" x="0.0" y="64" width="600" height="61"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KSh-Pu-i1B" id="MvA-4C-dHe">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="60.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HEl-0b-ctz">
+                                                    <rect key="frame" x="8" y="15.5" width="584" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="HEl-0b-ctz" firstAttribute="leading" secondItem="MvA-4C-dHe" secondAttribute="leading" constant="8" id="ASu-Gg-eM9"/>
+                                                <constraint firstAttribute="trailing" secondItem="HEl-0b-ctz" secondAttribute="trailing" constant="8" id="VCS-az-Dgw"/>
+                                                <constraint firstItem="HEl-0b-ctz" firstAttribute="centerX" secondItem="MvA-4C-dHe" secondAttribute="centerX" id="WF6-YD-FaC"/>
+                                                <constraint firstItem="HEl-0b-ctz" firstAttribute="centerY" secondItem="MvA-4C-dHe" secondAttribute="centerY" id="vSO-LP-hCw"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="178" id="PHZ-uf-PS8">
+                                        <rect key="frame" x="0.0" y="125" width="600" height="178"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PHZ-uf-PS8" id="RrX-4I-x5q">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="177.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="3aP-6w-f4Z">
+                                                    <rect key="frame" x="8" y="8" width="584" height="161.5"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="3aP-6w-f4Z" secondAttribute="bottom" constant="8" id="erw-CM-fSh"/>
+                                                <constraint firstItem="3aP-6w-f4Z" firstAttribute="leading" secondItem="RrX-4I-x5q" secondAttribute="leading" constant="8" id="nUc-yg-vRq"/>
+                                                <constraint firstAttribute="trailing" secondItem="3aP-6w-f4Z" secondAttribute="trailing" constant="8" id="srD-3H-Qx5"/>
+                                                <constraint firstItem="3aP-6w-f4Z" firstAttribute="top" secondItem="RrX-4I-x5q" secondAttribute="top" constant="8" id="tAo-l4-1KG"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="jkW-A5-ddn" id="5wb-Mj-4gO"/>
+                            <outlet property="delegate" destination="jkW-A5-ddn" id="Dpz-uG-k4E"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="dqF-na-fit"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uDT-Zf-8tn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1095" y="339"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="aPt-v7-1hc">
+            <objects>
+                <navigationController id="ZRN-8P-Dzn" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="IXd-Cm-6tQ"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WhD-4s-QAc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="jkW-A5-ddn" kind="relationship" relationship="rootViewController" id="7fZ-2M-LA0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5iH-1H-q6H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="353" y="339"/>
         </scene>
     </scenes>
 </document>

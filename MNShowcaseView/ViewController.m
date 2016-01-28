@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "MNShowcaseView.h"
 #import "UIView+MNShowcase.h"
 
 @interface ViewController ()
@@ -17,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UISwitch *switchSwitch;
 @property (weak, nonatomic) IBOutlet UIButton *btnRight;
 @property (weak, nonatomic) IBOutlet UIButton *btnLeft;
+@property (nonatomic, strong) MNShowcaseView *showcaseView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *barBtnSave;
 
 @end
 
@@ -31,6 +34,12 @@
     [_btnRight registerForShowcaseView];
     [_switchSwitch registerForShowcaseView];
     [_scSegmentedControl registerForShowcaseView];
+    _showcaseView = [MNShowcaseView new];
+    _showcaseView.arrayViews = @[_btnLarge,_viewView,_scSegmentedControl,_switchSwitch,_btnLarge,_btnRight,_tfTextField,[_barBtnSave valueForKey:@"view"]];
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [_showcaseView addShowcaseView];
 }
 
 - (void)didReceiveMemoryWarning {
