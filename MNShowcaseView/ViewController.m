@@ -35,7 +35,8 @@
     [_switchSwitch registerForShowcaseView];
     [_scSegmentedControl registerForShowcaseView];
     _showcaseView = [MNShowcaseView new];
-//    [_showcaseView set];
+    [_showcaseView setViewsToFocus:@[_btnLarge,_btnLeft,_btnRight] title:@[[NSNull null],@"Title", @"Title two"] description:@[@"One",[NSNull null], @"Two"]];
+//    _showcaseView.selectionTypeDefault = MNSelection_FrameRowAroundView;
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

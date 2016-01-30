@@ -18,20 +18,37 @@ typedef enum{
 }MNTextViewPosition;
 
 typedef enum{
+    MNButtonPosition_Default,
     MNButtonPosition_TopLeft,
     MNButtonPosition_BottomLeft,
     MNButtonPosition_BottomRight,
     MNButtonPosition_TopRight
 }MNButtonPosition;
 
+typedef enum{
+    MNSelection_Default,
+    MNSelection_RectangleAroundView,
+    MNSelection_RectangleRowAroundView
+}MNSelectionType;
+
 @interface MNShowcaseItem : NSObject
 -(instancetype)initWithView:(UIView*)view;
+-(instancetype)initWithViewToFocus:(UIView*)view title:(NSString*)title description:(NSString*)description;
+-(void)setViewToFocus:(UIView*)view title:(NSString*)title description:(NSString*)description;
 @property (nonatomic, weak, readonly) UIView *viewToFocus;
 @property (nonatomic) MNButtonPosition buttonPosition;
 @property (nonatomic) MNTextViewPosition textViewPosition;
+@property (nonatomic) MNSelectionType selectionType;
 @property (nonatomic,strong) NSString *textButtonTitle;
-@property (nonatomic,strong) NSString *textDescription;
 @property (nonatomic,strong) NSAttributedString *attributedDescription;
+@property (nonatomic,strong) NSString *titleText;
+@property (nonatomic,strong) NSString *descriptionText;
+@property (nonatomic,strong) UIFont *titleFont;
+@property (nonatomic,strong) UIFont *descriptionFont;
+@property (nonatomic,strong) UIColor *titleColor;
+@property (nonatomic,strong) UIColor *descriptionColor;
+@property (nonatomic) NSTextAlignment titleTextAlignment;
+@property (nonatomic) NSTextAlignment descriptionTextAlignment;
 @property (nonatomic) CGRect selectedRect;
 @end
 
@@ -59,17 +76,25 @@ typedef enum{
 
 @property (nonatomic, weak) id<MNShowcaseViewDelegate> delegate;
 @property (nonatomic,retain) UIColor *overlayBackgroundColor;
-@property (nonatomic, strong, readonly) UITextView *tvDescription;
-@property (nonatomic,setter=displayButton:) BOOL displayButton;
+@property (nonatomic, strong, readonly) UIButton *button;
+@property (nonatomic,weak, readonly) UIView *viewContainer;
+@property (nonatomic) BOOL shouldShowDefaultButton;
 @property (nonatomic) BOOL isSelectedAreaUserInteractionEnabled;
 @property (nonatomic) BOOL shouldDismissOnBackgroundClick;
 @property (nonatomic, readonly) BOOL isVisible;
-@property (nonatomic) MNButtonPosition buttonPosition;
-@property (nonatomic) MNTextViewPosition textViewPosition;
-@property (nonatomic,weak, readonly) UIView *viewContainer;
+//Default attributes applicable on all showcase items
+@property (nonatomic) MNButtonPosition buttonPositionDefault;
+@property (nonatomic) MNTextViewPosition textViewPositionDefault;
+@property (nonatomic) MNSelectionType selectionTypeDefault;
+@property (nonatomic,strong) UIFont *titleFontDefault;
+@property (nonatomic,strong) UIFont *descriptionFontDefault;
+@property (nonatomic,strong) UIColor *titleColorDefault;
+@property (nonatomic,strong) UIColor *descriptionColorDefault;
+@property (nonatomic) NSTextAlignment titleTextAlignmentDefault;
+@property (nonatomic) NSTextAlignment descriptionTextAlignmentDefault;
+// Show and hide methods
 -(void)showOnView:(UIView*)viewContainer;
 -(void)showOnMainWindow;
 -(void)dismiss;
-@property (nonatomic, strong, readonly) UIButton *button;
 
 @end
