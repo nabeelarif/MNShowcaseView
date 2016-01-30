@@ -31,8 +31,8 @@
 //            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Gestures" message:@"Long Gesture Detected" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
 //            [alertView show];
             MNShowcaseView *overlayView = [[MNShowcaseView alloc] init];
-            [overlayView setArrayViews:@[self]];
-            [overlayView addShowcaseView];
+            [overlayView setViewToFocus:self title:@"Test Title" description:@"Copyright © 2015 Muhammad Nabeel Arif. All rights reserved."];
+            [overlayView showOnMainWindow];
         }
     }
 }

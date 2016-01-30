@@ -22,38 +22,127 @@
 @interface MNShowcaseView()
 {
     int _currentIndexOfView;
-    MNShowcaseItem *_currentShowcaseItem
-;
+    MNShowcaseItem *_currentShowcaseItem;
 }
 @property (nonatomic,strong) UITapGestureRecognizer *gestureBackgroundTapped;
 @property (nonatomic,strong) NSArray *arrayButtonConstraints;
 @property (nonatomic,strong) NSArray *arrayTextViewConstraints;
-@property CGRect selectedRect;
+@property (nonatomic,strong) NSArray<UIView*> *arrayViews;
+@property (nonatomic,strong) NSArray<MNShowcaseItem*> *arrayShowcaseItems;
+//@property CGRect selectedRect;
 
 @end;
 
 @implementation MNShowcaseView
 @synthesize button = _button;
 @synthesize tvDescription = _tvDescription;
-- (instancetype)init
-{
+@synthesize viewContainer = _viewContainer;
+#pragma mark - Initialization Methods
+-(instancetype)init{
+    
     self = [super init];
     if (self) {
-        _overlayBackgroundColor = [UIColor colorWithWhite:0.0 alpha:0.6];
+        [self setUp];
     }
     return self;
 }
--(instancetype)initWithFrame:(CGRect)frame HoleRect:(CGRect)hole backgroundColor:(UIColor*)bkgColor
-{
+-(instancetype)initWithFrame:(CGRect)frame{
+    
     self = [super initWithFrame:frame];
     if (self) {
-        _selectedRect = hole;
-        _overlayBackgroundColor = bkgColor;
-        _tvDescription = [[UITextView alloc] init];
-        [self addMNShowcaseTapGesture];
+        [self setUp];
     }
     return self;
 }
+
+-(instancetype)initWithViewToFocus:(UIView*)view title:(NSString*)title description:(NSString*)description{
+    
+    self = [super init];
+    if (self) {
+        [self setUp];
+        [self setViewToFocus:view title:title description:description];
+    }
+    return self;
+}
+-(instancetype)initWithViewsToFocus:(NSArray<UIView*>*)views title:(NSArray<NSString*>*)titles description:(NSArray<NSString*>*)descriptions
+{
+    
+    self = [super init];
+    if (self) {
+        [self setUp];
+        [self setViewsToFocus:views title:titles description:descriptions];
+    }
+    return self;
+}
+-(instancetype)initWithShowcaseItem:(MNShowcaseItem*)showcaseItem{
+    
+    self = [super init];
+    if (self) {
+        [self setUp];
+        [self setShowcaseItem:showcaseItem];
+    }
+    return self;
+}
+-(instancetype)initWithShowcaseItems:(NSArray<MNShowcaseItem *>*)showcaseItems{
+    
+    self = [super init];
+    if (self) {
+        [self setUp];
+        [self setShowcaseItems:showcaseItems];
+    }
+    return self;
+}
+-(void)setUp{
+    _overlayBackgroundColor = [UIColor colorWithWhite:0.0 alpha:0.6];
+    [self addMNShowcaseTapGesture];
+}
+#pragma mark - Methods to set Views or ShowcaseItems
+
+-(void)setViewToFocus:(UIView*)view
+                title:(NSString*)title
+          description:(NSString*)description{
+    [self setViewsToFocus:@[view] title:@[title?title:[NSNull null]] description:@[description?description:[NSNull null]]];
+}
+-(void)setViewsToFocus:(NSArray<UIView*>*)views
+                 title:(NSArray<NSString*>*)titles
+           description:(NSArray<NSString*>*)descriptions{
+    if (views && views.count>0) {
+        NSMutableArray *arrayShowcaseItems = [NSMutableArray new];
+        for (int i=0;i<views.count;i++) {
+            UIView *view = [views objectAtIndex:i];
+            NSString *title = (i<titles.count)?[titles objectAtIndex:i]:nil;
+            NSString *description = (i<descriptions.count)?[descriptions objectAtIndex:i]:nil;
+            NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] init];
+            if (title && [title isKindOfClass:[NSString class]] && title.length>0) {
+                NSMutableParagraphStyle *paragraphStyle = NSMutableParagraphStyle.new;
+                paragraphStyle.alignment                = NSTextAlignmentCenter;
+                NSDictionary *attrib = @{NSFontAttributeName : [UIFont boldSystemFontOfSize:15], NSForegroundColorAttributeName : [UIColor whiteColor], NSParagraphStyleAttributeName:paragraphStyle};
+                [attributedString appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n\n",title] attributes:attrib]];
+            }
+            if (description && [description isKindOfClass:[NSString class]] && title.length>0) {
+                
+                NSMutableParagraphStyle *paragraphStyle = NSMutableParagraphStyle.new;
+                paragraphStyle.alignment                = NSTextAlignmentCenter;
+                NSDictionary *attrib = @{NSFontAttributeName : [UIFont systemFontOfSize:14], NSForegroundColorAttributeName : [UIColor whiteColor],NSParagraphStyleAttributeName:paragraphStyle};
+                [attributedString appendAttributedString:[[NSAttributedString alloc] initWithString:description attributes:attrib]];
+            }
+            MNShowcaseItem *item = [[MNShowcaseItem alloc] initWithView:view];
+            item.textDescription = view.description;
+            if (attributedString.length>0) {
+                item.attributedDescription = attributedString;
+            }
+            [arrayShowcaseItems addObject:item];
+        }
+        [self setShowcaseItems:[NSArray arrayWithArray:arrayShowcaseItems]];
+    }
+}
+-(void)setShowcaseItem:(MNShowcaseItem*)showcaseItem{
+    [self setShowcaseItems:@[showcaseItem]];
+}
+-(void)setShowcaseItems:(NSArray<MNShowcaseItem *>*)showcaseItems{
+    self.arrayShowcaseItems = showcaseItems;
+}
+#pragma mark - Overridden methods
 //http://stackoverflow.com/questions/9711248/cut-transparent-hole-in-uiview
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -66,7 +155,7 @@
     UIRectFill(rect);
     
     //    for (NSValue *holeRectValue in rectsArray) {
-    CGRect holeRect = _selectedRect;
+    CGRect holeRect = _currentShowcaseItem.selectedRect;
     CGRect holeRectIntersection = CGRectIntersection( holeRect, rect );
     [[UIColor clearColor] setFill];
     UIRectFill(holeRectIntersection);
@@ -87,7 +176,65 @@
     self.backgroundColor = [UIColor clearColor];
 }
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
-    return !CGRectContainsPoint(_selectedRect, point) || CGRectContainsPoint(_button.frame, point);
+    if (_isSelectedAreaUserInteractionEnabled) {
+        BOOL isInside = CGRectContainsPoint(_currentShowcaseItem.selectedRect, point) || CGRectContainsPoint(_button.frame, point);
+        return isInside;
+    }
+    return [super pointInside:point withEvent:event];
+}
+-(void)dealloc{
+    _tvDescription = nil;
+}
+#pragma mark - KVO To observe frame change
+// Observe frame change
+//http://stackoverflow.com/questions/4874288/use-key-value-observing-to-get-a-kvo-callback-on-a-uiviews-frame
+//-(void)willMoveToSuperview:(UIView *)newSuperview
+//{
+//    [self removeParentFrameObserver];
+//}
+
+-(void)didMoveToSuperview{
+    if (self.superview) {
+        [self.superview addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:nil];
+    }
+}
+-(void)removeParentFrameObserver{
+    if (self.superview) {
+        [self.superview removeObserver:self forKeyPath:@"frame"];
+    }
+}
+// Change frame if super view's frame changes
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if([keyPath isEqualToString:@"frame"]) {
+        CGRect oldFrame = CGRectNull;
+        CGRect newFrame = CGRectNull;
+        if([change objectForKey:@"old"] != [NSNull null]) {
+            oldFrame = [[change objectForKey:@"old"] CGRectValue];
+        }
+        if([object valueForKeyPath:keyPath] != [NSNull null]) {
+            newFrame = [[object valueForKeyPath:keyPath] CGRectValue];
+            self.frame = newFrame;
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.01*NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                [self showOnView:_viewContainer];
+            });
+        }
+    }
+}
+#pragma mark - tap Gesture Recognizer
+-(void)addMNShowcaseTapGesture{
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissMNShowcaseView:)];
+    [self addGestureRecognizer:tap];
+}
+-(void)dismissMNShowcaseView:(UITapGestureRecognizer*)sender
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(showcaseView:isTappedAtPoint:isInsideSelectedArea:)]) {
+        CGPoint point = [sender locationInView:self];
+        BOOL isInside = CGRectContainsPoint(_currentShowcaseItem.selectedRect, point);
+        [_delegate showcaseView:self isTappedAtPoint:point isInsideSelectedArea:isInside];
+    }
+    if (_shouldDismissOnBackgroundClick) {
+        [self dismiss];
+    }
 }
 #pragma mark - button
 -(UIButton *)button{
@@ -123,7 +270,7 @@
                                                                         toItem:myBtn
                                                                      attribute:NSLayoutAttributeRight
                                                                     multiplier:1.0
-                                                                      constant:10.0]];
+                                                                      constant:16.0]];
             [self addConstraints:_arrayButtonConstraints];
         }
     }else{
@@ -144,6 +291,11 @@
         _tvDescription = [[UITextView alloc] init];
         _tvDescription.textContainer.maximumNumberOfLines = 0;
         _tvDescription.scrollEnabled = NO;
+        _tvDescription.userInteractionEnabled = NO;
+        _tvDescription.textColor = [UIColor whiteColor];
+        _tvDescription.textAlignment = NSTextAlignmentCenter;
+        _tvDescription.font = [UIFont systemFontOfSize:14];
+        _tvDescription.backgroundColor = [UIColor clearColor];
     }
     return _tvDescription;
 }
@@ -154,7 +306,6 @@
         }else{
             self.tvDescription.text = _currentShowcaseItem.textDescription;
         }
-        self.tvDescription.backgroundColor = [UIColor yellowColor];
         if (self.tvDescription.superview==nil) {
             [self addSubview:self.tvDescription];
             
@@ -176,8 +327,8 @@
         }
         if (position==MNTextViewPosition_Automatic) {
             CGFloat height =  self.frame.size.height;
-            CGFloat topMargin = CGRectGetMinY(_selectedRect);
-            CGFloat bottomMargin = height - CGRectGetMaxY(_selectedRect);
+            CGFloat topMargin = CGRectGetMinY(_currentShowcaseItem.selectedRect);
+            CGFloat bottomMargin = height - CGRectGetMaxY(_currentShowcaseItem.selectedRect);
             if (topMargin>bottomMargin) {
                  position = MNTextViewPosition_Above;
             }else{
@@ -194,7 +345,7 @@
                                                                           toItem:self
                                                                        attribute:NSLayoutAttributeTop
                                                                       multiplier:1.0
-                                                                        constant:CGRectGetMinY(_selectedRect)-8]];
+                                                                        constant:CGRectGetMinY(_currentShowcaseItem.selectedRect)-8]];
             [self addConstraints:_arrayTextViewConstraints];
         }else if (position==MNTextViewPosition_Below) {
             if (_arrayTextViewConstraints) {
@@ -206,7 +357,7 @@
                                                                           toItem:self
                                                                        attribute:NSLayoutAttributeTop
                                                                       multiplier:1.0
-                                                                        constant:CGRectGetMaxY(_selectedRect)+8]];
+                                                                        constant:CGRectGetMaxY(_currentShowcaseItem.selectedRect)+8]];
             [self addConstraints:_arrayTextViewConstraints];
         }
         [self.tvDescription sizeToFit];
@@ -217,33 +368,49 @@
 -(void)displayShowCaseView
 {
     if (_arrayShowcaseItems.count>0) {
+        
+        UIView *view = [_arrayShowcaseItems objectAtIndex:_currentIndexOfView].viewToFocus;
+        _currentShowcaseItem.selectedRect = [_viewContainer convertRect:view.frame fromView:view.superview];
+        if (_delegate && [_delegate respondsToSelector:@selector(showcaseView:willShowItem:)]) {
+            [_delegate showcaseView:self willShowItem:_currentShowcaseItem];
+        }
         if (_currentIndexOfView==_arrayShowcaseItems.count-1) {
             [self.button setTitle:@"Done" forState:UIControlStateNormal];
         }else{
             [self.button setTitle:@"Next" forState:UIControlStateNormal];
         }
         [self.button sizeToFit];
-        UIView *view = [_arrayShowcaseItems objectAtIndex:_currentIndexOfView].viewToFocus;
-        UIView *container = (UIView*)[UIApplication sharedApplication].keyWindow;
-        _selectedRect = [container convertRect:view.frame fromView:view.superview];
+        if (!_viewContainer) {
+            _viewContainer = (UIView*)[UIApplication sharedApplication].keyWindow;
+        }
         [self displayTextView:YES];
-        [self displayButton:YES];
+        [self displayButton:_displayButton];
         [self setNeedsDisplay];
     }
 }
--(void)addShowcaseView{
+-(void)showOnView:(UIView *)viewContainer{
+    _viewContainer = viewContainer;
     if (!self.superview) {
-        UIView *container = (UIView*)[UIApplication sharedApplication].keyWindow;
-        self.frame = container.frame;
-        [container addSubview:self];
-        [self displayShowCaseView];
+        [self removeFromSuperview];
     }
+    self.frame = _viewContainer.bounds;
+    [_viewContainer addSubview:self];
+    _isVisible = YES;
+    [self displayShowCaseView];
 }
--(void)removeShowcaseView{
+-(void)showOnMainWindow{
+    UIView *container = (UIView*)[UIApplication sharedApplication].keyWindow;
+    [self showOnView:container];
+}
+-(void)dismiss{
     if (self.superview)
     {
+        if (_delegate && [_delegate respondsToSelector:@selector(showcaseViewWillDismiss:)]) {
+            [_delegate showcaseViewWillDismiss:self];
+        }
         [self removeParentFrameObserver];
         [self removeFromSuperview];
+        _isVisible = NO;
     }
 }
 #pragma mark - array viwes
@@ -261,61 +428,12 @@
         _currentShowcaseItem = [_arrayShowcaseItems objectAtIndex:_currentIndexOfView];
     }
 }
-#pragma mark - KVO
-// Observe frame change
-//http://stackoverflow.com/questions/4874288/use-key-value-observing-to-get-a-kvo-callback-on-a-uiviews-frame
--(void)willMoveToSuperview:(UIView *)newSuperview
-{
-    [self removeParentFrameObserver];
-}
--(void)didMoveToSuperview
-{
-    if (self.superview) {
-        [self.superview addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:nil];
+-(void)setArrayShowcaseItems:(NSArray<MNShowcaseItem *> *)arrayShowcaseItems{
+    _arrayShowcaseItems = arrayShowcaseItems;
+    if (_arrayShowcaseItems && _arrayShowcaseItems.count) {
+        _currentIndexOfView = 0;
+        _currentShowcaseItem = [_arrayShowcaseItems objectAtIndex:_currentIndexOfView];
     }
-}
--(void)removeParentFrameObserver
-{
-    //Remove observer
-    if (self.superview) {
-        @try{
-            [self.superview removeObserver:self forKeyPath:@"frame"];
-        }@catch(id anException){
-            //do nothing, obviously it wasn't attached because an exception was thrown
-        }
-    }
-}
-// Change frame if super view's frame changes
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if([keyPath isEqualToString:@"frame"]) {
-        CGRect oldFrame = CGRectNull;
-        CGRect newFrame = CGRectNull;
-        if([change objectForKey:@"old"] != [NSNull null]) {
-            oldFrame = [[change objectForKey:@"old"] CGRectValue];
-        }
-        if([object valueForKeyPath:keyPath] != [NSNull null]) {
-            newFrame = [[object valueForKeyPath:keyPath] CGRectValue];
-            self.frame = newFrame;
-            [self setNeedsDisplay];
-        }
-    }
-}
-#pragma mark - tap Gesture Recognizer
--(void)addMNShowcaseTapGesture{
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissMNShowcaseView:)];
-    [self addGestureRecognizer:tap];
-}
--(void)dismissMNShowcaseView:(UITapGestureRecognizer*)sender
-{
-    if (self.superview)
-    {
-        [self removeParentFrameObserver];
-        [self removeFromSuperview];
-    }
-}
-#pragma mark - dealloc
--(void)dealloc{
-    _tvDescription = nil;
 }
 
 @end

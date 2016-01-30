@@ -25,31 +25,51 @@ typedef enum{
 }MNButtonPosition;
 
 @interface MNShowcaseItem : NSObject
+-(instancetype)initWithView:(UIView*)view;
 @property (nonatomic, weak, readonly) UIView *viewToFocus;
 @property (nonatomic) MNButtonPosition buttonPosition;
 @property (nonatomic) MNTextViewPosition textViewPosition;
 @property (nonatomic,strong) NSString *textButtonTitle;
 @property (nonatomic,strong) NSString *textDescription;
 @property (nonatomic,strong) NSAttributedString *attributedDescription;
+@property (nonatomic) CGRect selectedRect;
 @end
 
 @protocol MNShowcaseViewDelegate <NSObject>
-
--(void)showcaseView:(MNShowcaseView*)showcase willShowItem:(MNShowcaseItem*)showcaseItem;
+@optional
+-(void)showcaseView:(MNShowcaseView*)showcaseView willShowItem:(MNShowcaseItem*)showcaseItem;
+-(void)showcaseViewWillDismiss:(MNShowcaseView*)showcaseView;
+-(void)showcaseView:(MNShowcaseView *)showcaseView isTappedAtPoint:(CGPoint)point isInsideSelectedArea:(BOOL)isInside;
 
 @end
 
 @interface MNShowcaseView : UIView
+// Initialization methods
+-(instancetype)initWithViewToFocus:(UIView*)view title:(NSString*)title description:(NSString*)description;
+-(instancetype)initWithViewsToFocus:(NSArray<UIView*>*)views title:(NSArray<NSString*>*)titles description:(NSArray<NSString*>*)descriptions;
+-(instancetype)initWithShowcaseItem:(MNShowcaseItem*)showcaseItem;
+-(instancetype)initWithShowcaseItems:(NSArray<MNShowcaseItem *>*)showcaseItems;
+
+//Set views or showcaseItems
+
+-(void)setViewToFocus:(UIView*)view title:(NSString*)title description:(NSString*)description;
+-(void)setViewsToFocus:(NSArray<UIView*>*)views title:(NSArray<NSString*>*)titles description:(NSArray<NSString*>*)descriptions;
+-(void)setShowcaseItem:(MNShowcaseItem*)showcaseItem;
+-(void)setShowcaseItems:(NSArray<MNShowcaseItem *>*)showcaseItems;
+
+@property (nonatomic, weak) id<MNShowcaseViewDelegate> delegate;
 @property (nonatomic,retain) UIColor *overlayBackgroundColor;
-@property (nonatomic,strong) NSArray<UIView*> *arrayViews;
-@property (nonatomic,strong) NSArray<MNShowcaseItem*> *arrayShowcaseItems;
 @property (nonatomic, strong, readonly) UITextView *tvDescription;
 @property (nonatomic,setter=displayButton:) BOOL displayButton;
+@property (nonatomic) BOOL isSelectedAreaUserInteractionEnabled;
+@property (nonatomic) BOOL shouldDismissOnBackgroundClick;
+@property (nonatomic, readonly) BOOL isVisible;
 @property (nonatomic) MNButtonPosition buttonPosition;
 @property (nonatomic) MNTextViewPosition textViewPosition;
--(void)addShowcaseView;
--(void)removeShowcaseView;
+@property (nonatomic,weak, readonly) UIView *viewContainer;
+-(void)showOnView:(UIView*)viewContainer;
+-(void)showOnMainWindow;
+-(void)dismiss;
 @property (nonatomic, strong, readonly) UIButton *button;
--(instancetype)initWithFrame:(CGRect)frame HoleRect:(CGRect)hole backgroundColor:(UIColor*)bkgColor;
 
 @end

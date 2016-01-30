@@ -35,11 +35,11 @@
     [_switchSwitch registerForShowcaseView];
     [_scSegmentedControl registerForShowcaseView];
     _showcaseView = [MNShowcaseView new];
-    _showcaseView.arrayViews = @[_btnLarge,_viewView,_scSegmentedControl,_switchSwitch,_btnLarge,_btnRight,_tfTextField,[_barBtnSave valueForKey:@"view"]];
+//    [_showcaseView set];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [_showcaseView addShowcaseView];
+    [_showcaseView showOnMainWindow];
 }
 
 - (void)didReceiveMemoryWarning {
