@@ -446,7 +446,7 @@
 				INFOPLIST_FILE = MNShowcaseView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.advancedprogressive.MNShowcaseView;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nabeelarif.MNShowcaseView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -459,7 +459,7 @@
 				INFOPLIST_FILE = MNShowcaseView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.advancedprogressive.MNShowcaseView;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nabeelarif.MNShowcaseView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -470,7 +470,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = MNShowcaseViewTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.advancedprogressive.MNShowcaseViewTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nabeelarif.MNShowcaseViewTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MNShowcaseView.app/MNShowcaseView";
 			};
@@ -482,7 +482,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = MNShowcaseViewTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.advancedprogressive.MNShowcaseViewTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nabeelarif.MNShowcaseViewTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MNShowcaseView.app/MNShowcaseView";
 			};
@@ -493,7 +493,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = MNShowcaseViewUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.advancedprogressive.MNShowcaseViewUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nabeelarif.MNShowcaseViewUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_TARGET_NAME = MNShowcaseView;
 				USES_XCTRUNNER = YES;
@@ -505,7 +505,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = MNShowcaseViewUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.advancedprogressive.MNShowcaseViewUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nabeelarif.MNShowcaseViewUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_TARGET_NAME = MNShowcaseView;
 				USES_XCTRUNNER = YES;
