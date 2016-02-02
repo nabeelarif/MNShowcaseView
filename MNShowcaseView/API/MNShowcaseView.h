@@ -51,6 +51,11 @@ typedef NS_ENUM(NSInteger, MNSelectionEffect){
     MNSelectionEffect_None,
     MNSelectionEffect_GlowBoundry
 };
+typedef NS_ENUM(NSInteger, MNBOOL) {
+    MNBOOL_Default,
+    MNBOOL_YES,
+    MNBOOL_NO
+};
 /**
  The class represents an objects to be dsiplayed in showcase view. You can set multiple 
  showcase items in ShowcaseView. And showcase view will iterate those items one by one.
@@ -82,6 +87,10 @@ typedef NS_ENUM(NSInteger, MNSelectionEffect){
  */
 @property (nonatomic, weak, readonly) UIView *viewToFocus;
 /**
+ If YES, user will be able to interact with view under selected area. If NO, Views under selected area will not be responsive.
+ */
+@property (nonatomic) MNBOOL isInteractionEnabled;
+/**
  Button position for current MNShowcaseItem. If user will not set 'buttonPosition' 
  manually, 'MNShowcaseView.buttonPositionDefault'
  will be used to decide button position.
@@ -106,7 +115,7 @@ typedef NS_ENUM(NSInteger, MNSelectionEffect){
 /**
  Title of 'MNShowcaseView.button' for current MNSowcaseItem.
  */
-@property (nonatomic,strong) NSString *textButtonTitle;
+@property (nonatomic,strong) NSString *buttonTitle;
 /**
  Description for current MNShowcaseItem.
  */
@@ -253,7 +262,7 @@ typedef NS_ENUM(NSInteger, MNSelectionEffect){
 /**
  If YES, user will be able to interact with view under selected area. If NO, Views under selected area will not be responsive.
  */
-@property (nonatomic) BOOL isSelectedAreaUserInteractionEnabled;
+@property (nonatomic) MNBOOL isInteractionEnabledDefault;
 /**
  If YES, MNShowcaseView will be dismissed if it is tapped.
  */
@@ -262,6 +271,13 @@ typedef NS_ENUM(NSInteger, MNSelectionEffect){
  Indicates the visibilityh of MNShowcaseView
  */
 @property (nonatomic, readonly) BOOL isVisible;
+/**
+ Button title applicable to all MNShowcaseItems. This value will be used if
+ MNShowcaseItem.buttonTitle is set to nil.
+ 'buttonTitleDefault' is only usefull if shouldShowDefaultButton is set to YES.
+ If user do not set any value buttonTitleDefault=MNButtonPosition_TopRight
+ */
+@property (nonatomic,strong) NSString *buttonTitleDefault;
 //Default attributes applicable on all showcase items
 /**
 .Button position applicable to all MNShowcaseItems. This value will be used if

@@ -158,6 +158,8 @@
         if (_selectionTypeDefault!=MNSelection_Default) {
             selectionType = _selectionTypeDefault;
         }
+    }else{
+        selectionType = _currentShowcaseItem.selectionType;
     }
     CGRect selectedRect = _currentShowcaseItem.selectedRect;
     UIBezierPath *path = nil;
@@ -243,9 +245,19 @@
     self.backgroundColor = [UIColor clearColor];
 }
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
-    if (_isSelectedAreaUserInteractionEnabled) {
-        BOOL isInside = CGRectContainsPoint(_currentShowcaseItem.selectedRect, point) || CGRectContainsPoint(_button.frame, point);
-        return isInside;
+    MNBOOL isInteractionEnabled = MNBOOL_NO;
+    if (_currentShowcaseItem.isInteractionEnabled==MNBOOL_Default) {
+        if (_isInteractionEnabledDefault !=MNBOOL_Default) {
+            isInteractionEnabled = _isInteractionEnabledDefault;
+        }
+    }else{
+        isInteractionEnabled = _currentShowcaseItem.isInteractionEnabled;
+    }
+    if (isInteractionEnabled==MNBOOL_YES) {
+        BOOL isInside = CGRectContainsPoint(_currentShowcaseItem.selectedRect, point);
+        if (isInside) {
+            return NO;
+        };
     }
     return [super pointInside:point withEvent:event];
 }
@@ -310,9 +322,17 @@
 -(void)shouldShowDefaultButton:(BOOL)shouldShowDefaultButton
 {
     _shouldShowDefaultButton = shouldShowDefaultButton;
-    if (_shouldShowDefaultButton  ) {
+    if (_shouldShowDefaultButton ) {
+        NSString *buttonTitle = _currentShowcaseItem.buttonTitle;
+        if (buttonTitle==nil) {
+            buttonTitle=_buttonTitleDefault;
+        }
+        if (buttonTitle) {
+            [self.button setTitle:buttonTitle forState:UIControlStateNormal];
+        }
         if (self.button.superview==nil) {
             [self addSubview:self.button];
+        }
             UIButton *myBtn = self.button;
             [myBtn sizeToFit];
             if (_arrayButtonConstraints) {
@@ -361,7 +381,7 @@
                                            toItem:myBtn
                                            attribute:NSLayoutAttributeLeft
                                            multiplier:1.0
-                                           constant:16.0]];
+                                           constant:-16.0]];
             }
             if (position==MNButtonPosition_BottomRight || position==MNButtonPosition_BottomLeft) {
                 
@@ -376,7 +396,6 @@
             }
             _arrayButtonConstraints = [NSArray arrayWithArray:arrConstraints];
             [self addConstraints:_arrayButtonConstraints];
-        }
     }else{
         [self.button removeFromSuperview];
     }
