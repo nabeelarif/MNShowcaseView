@@ -30,9 +30,11 @@
         {
 //            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Gestures" message:@"Long Gesture Detected" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
 //            [alertView show];
-            MNShowcaseView *overlayView = [[MNShowcaseView alloc] init];
-            [overlayView setViewToFocus:self title:@"Test Title" description:@"Copyright © 2015 Muhammad Nabeel Arif. All rights reserved."];
-            [overlayView showOnMainWindow];
+            MNShowcaseView *showcaseView = [[MNShowcaseView alloc] init];
+            [showcaseView setViewToFocus:self title:@"Test Title" description:@"Copyright © 2015 Muhammad Nabeel Arif. All rights reserved."];
+            showcaseView.shouldDismissOnBackgroundClick = YES;
+            showcaseView.shouldShowDefaultButton = YES;
+            [showcaseView showOnMainWindow];
         }
     }
 }

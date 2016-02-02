@@ -35,7 +35,9 @@
     [_switchSwitch registerForShowcaseView];
     [_scSegmentedControl registerForShowcaseView];
     _showcaseView = [MNShowcaseView new];
-    [_showcaseView setViewsToFocus:@[_btnLarge,_btnLeft,_btnRight] title:@[[NSNull null],@"Title", @"Title two"] description:@[@"One",[NSNull null], @"Two"]];
+    [_showcaseView setViewsToFocus:@[_viewView,_btnLarge,_viewView,_btnLeft,_btnRight,_switchSwitch,_scSegmentedControl] title:@[[NSNull null],@"Title", @"Title two"] description:@[@"One",[NSNull null], @"Two"]];
+    _showcaseView.highlightedColorDefault = [UIColor redColor];
+    _showcaseView.selectionTypeDefault = MNSelection_EllipseOutside;
 //    _showcaseView.selectionTypeDefault = MNSelection_FrameRowAroundView;
 }
 -(void)viewWillAppear:(BOOL)animated{

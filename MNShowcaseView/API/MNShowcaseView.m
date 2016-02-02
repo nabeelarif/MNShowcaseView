@@ -28,6 +28,7 @@
     // user, we will use default alignment options which are set for ShowcaseView.
     _titleTextAlignment = -1;
     _descriptionTextAlignment = -1;
+    _selectionEffect = MNSelectionEffect_Default;
     
 }
 @end
@@ -43,6 +44,7 @@
 //@property (nonatomic,strong) NSArray<UIView*> *arrayViews;
 @property (nonatomic,strong) NSArray<MNShowcaseItem*> *showcaseItems;
 @property (nonatomic, strong, readonly) UITextView *textViewDescription;
+@property (nonatomic, weak) UIImageView *imageView;
 //@property CGRect selectedRect;
 
 @end;
@@ -55,14 +57,6 @@
 -(instancetype)init{
     
     self = [super init];
-    if (self) {
-        [self setUp];
-    }
-    return self;
-}
--(instancetype)initWithFrame:(CGRect)frame{
-    
-    self = [super initWithFrame:frame];
     if (self) {
         [self setUp];
     }
@@ -107,19 +101,22 @@
     return self;
 }
 -(void)setUp{
-    _overlayBackgroundColor = [UIColor colorWithWhite:0.0 alpha:0.6];
+    _showcaseBackgroundColor = [UIColor colorWithWhite:0.0 alpha:0.6];
     [self addMNShowcaseTapGesture];
     _shouldShowDefaultButton = YES;
     _buttonPositionDefault = MNButtonPosition_TopRight;
     _textViewPositionDefault = MNTextViewPosition_Automatic;
-    _selectionTypeDefault = MNSelection_RectangleAroundView;
+    _selectionTypeDefault = MNSelection_Rectangle;
+    _selectionEffectDefault = MNSelectionEffect_GlowBoundry;
     _titleFontDefault = [UIFont boldSystemFontOfSize:16];
     _descriptionFontDefault = [UIFont systemFontOfSize:14];
     _titleColorDefault = [UIColor whiteColor];
+    _selectedAreaFillColorDefault = [UIColor clearColor];
     _descriptionColorDefault = [UIColor whiteColor];
     _titleTextAlignmentDefault = NSTextAlignmentCenter;
     _descriptionTextAlignmentDefault = NSTextAlignmentCenter;
-}
+    _highlightedColorDefault = [UIColor whiteColor];
+};
 #pragma mark - Methods to set Views or ShowcaseItems
 
 -(void)setViewToFocus:(UIView*)view
@@ -154,29 +151,92 @@
 }
 #pragma mark - Overridden methods
 - (void)drawRect:(CGRect)rect {
-    // Drawing code
-    if (!_overlayBackgroundColor) {
-        _overlayBackgroundColor = [UIColor colorWithWhite:0.0 alpha:0.9];
+    
+//        CGRect selectedRectIntersection = CGRectIntersection( selectedRect, rect );
+    MNSelectionType selectionType = MNSelection_Rectangle;
+    if (_currentShowcaseItem.selectionType==MNSelection_Default) {
+        if (_selectionTypeDefault!=MNSelection_Default) {
+            selectionType = _selectionTypeDefault;
+        }
     }
-    [_overlayBackgroundColor setFill];
+    CGRect selectedRect = _currentShowcaseItem.selectedRect;
+    UIBezierPath *path = nil;
+
+    if (selectionType==MNSelection_CircleInside){
+        //To draw circel selected rect must be square
+        
+        if (selectedRect.size.width>selectedRect.size.height) {
+            CGRect newRect = selectedRect;
+            newRect.size.width = selectedRect.size.height;
+            newRect.origin.x += (selectedRect.size.width-selectedRect.size.height)/2;
+            selectedRect = newRect;
+        }else if(selectedRect.size.width<selectedRect.size.height){
+            CGRect newRect = selectedRect;
+            newRect.size.height = selectedRect.size.width;
+            newRect.origin.y += (selectedRect.size.height-selectedRect.size.width)/2;
+            selectedRect = newRect;
+        }
+        
+        path = [UIBezierPath bezierPathWithOvalInRect:selectedRect];
+    }else if (selectionType==MNSelection_EllipseInside){
+        path = [UIBezierPath bezierPathWithOvalInRect:selectedRect];
+    }else if (selectionType==MNSelection_EllipseOutside){
+        //Draw ellipse outside of CGRect
+        //http://stackoverflow.com/questions/433371/ellipse-bounding-a-rectangle/6716520#6716520
+        CGRect newRect = selectedRect;
+        newRect.size.width = selectedRect.size.width/sqrt(2.0)*2.0;
+        newRect.size.height = selectedRect.size.height/sqrt(2.0)*2.0;
+        newRect.origin.x -= (newRect.size.width-selectedRect.size.width)/2;
+        newRect.origin.y -= (newRect.size.height-selectedRect.size.height)/2;
+        selectedRect = newRect;
+        path = [UIBezierPath bezierPathWithOvalInRect:selectedRect];
+    }else //if (selectionType==MNSelection_Rectangle || selectionType == MNSelection_RectangleRow)
+    {
+        path = [UIBezierPath bezierPathWithRect:selectedRect];
+    }
+    //////////////////
+    
+    UIColor *highlightColor = _currentShowcaseItem.highlightedColor;
+    if (!highlightColor) {
+        highlightColor = _highlightedColorDefault;
+    }
+    UIColor *backgroundColor = _showcaseBackgroundColor;
+    if (!_showcaseBackgroundColor) {
+        backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.6];
+    }
+    UIColor *selectedAreaFillColor = _currentShowcaseItem.selectedAreaFillColor;
+    if (!selectedAreaFillColor) {
+        selectedAreaFillColor = _selectedAreaFillColorDefault;
+    }
+    
+    MNSelectionEffect selectionEffect = (_currentShowcaseItem.selectionEffect!=MNSelectionEffect_Default)?_currentShowcaseItem.selectionEffect:_selectionEffectDefault;
+    if (selectionEffect==MNSelectionEffect_Default) {
+        selectionEffect = MNSelectionEffect_GlowBoundry;
+    }
+    //Code concept taken from iShowcaseView
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [backgroundColor CGColor]);
+    CGContextFillRect(context, [self bounds]);
+    CGContextSetFillColorWithColor(context, backgroundColor.CGColor);
     UIRectFill(rect);
     
-    //    for (NSValue *holeRectValue in rectsArray) {
-    CGRect holeRect = _currentShowcaseItem.selectedRect;
-    CGRect holeRectIntersection = CGRectIntersection( holeRect, rect );
-    [[UIColor clearColor] setFill];
-    UIRectFill(holeRectIntersection);
-//        CGContextRef context = UIGraphicsGetCurrentContext();
-//        
-//        if( CGRectIntersectsRect( holeRectIntersection, rect ) )
-//        {
-//            CGContextAddEllipseInRect(context, holeRectIntersection);
-//            CGContextClip(context);
-//            CGContextClearRect(context, holeRectIntersection);
-//            CGContextSetFillColorWithColor( context, [UIColor clearColor].CGColor );
-//            CGContextFillRect( context, holeRectIntersection);
-//        }
-//    }
+    if (_selectionEffectDefault==MNSelectionEffect_GlowBoundry) {
+        // Draw Highlight
+        CGContextSetShadowWithColor(context, CGSizeZero, 30.0f,
+                                    highlightColor.CGColor);
+        CGContextSetFillColorWithColor(context, backgroundColor.CGColor);
+        CGContextSetStrokeColorWithColor(context, highlightColor.CGColor);
+        CGContextDrawPath(context, kCGPathFillStroke);
+        CGContextAddPath(context, path.CGPath);
+        CGContextDrawPath(context, kCGPathFillStroke);
+    }
+    
+    // Clear Circle
+    CGContextSetFillColorWithColor(context, selectedAreaFillColor.CGColor);
+    CGContextSetBlendMode(context, kCGBlendModeClear);
+    CGContextAddPath(context, path.CGPath);
+    CGContextDrawPath(context, kCGPathFill);
+    CGContextSetBlendMode(context, kCGBlendModeNormal);
 }
 -(void)layoutSubviews{
     [super layoutSubviews];
@@ -193,12 +253,6 @@
     _textViewDescription = nil;
 }
 #pragma mark - KVO To observe frame change
-// Observe frame change
-//http://stackoverflow.com/questions/4874288/use-key-value-observing-to-get-a-kvo-callback-on-a-uiviews-frame
-//-(void)willMoveToSuperview:(UIView *)newSuperview
-//{
-//    [self removeParentFrameObserver];
-//}
 
 -(void)didMoveToSuperview{
     if (self.superview) {
@@ -421,7 +475,7 @@
         UIView *view = [_showcaseItems objectAtIndex:_currentIndexOfView].viewToFocus;
         
         // Get the applicable selection type
-        MNSelectionType selectionType = MNSelection_RectangleAroundView;
+        MNSelectionType selectionType = MNSelection_Rectangle;
         if (_currentShowcaseItem.selectionType==MNSelection_Default) {
             if (_selectionTypeDefault!=MNSelection_Default) {
                 selectionType = _selectionTypeDefault;
@@ -429,14 +483,13 @@
         }else{
             selectionType = _currentShowcaseItem.selectionType;
         }
-        if (selectionType==MNSelection_RectangleAroundView) {
-            _currentShowcaseItem.selectedRect = [_viewContainer convertRect:view.frame fromView:view.superview];
-
-        }else if(selectionType==MNSelection_RectangleRowAroundView){
+        if(selectionType==MNSelection_RectangleRow){
             CGRect selectionRect = [_viewContainer convertRect:view.frame fromView:view.superview];
             selectionRect.origin.x = 0;
             selectionRect.size.width = self.frame.size.width;
             _currentShowcaseItem.selectedRect = selectionRect;
+        }else{
+            _currentShowcaseItem.selectedRect = [_viewContainer convertRect:view.frame fromView:view.superview];
         }
         if (_delegate && [_delegate respondsToSelector:@selector(showcaseView:willShowItem:)]) {
             [_delegate showcaseView:self willShowItem:_currentShowcaseItem];
