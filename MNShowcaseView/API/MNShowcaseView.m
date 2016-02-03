@@ -319,7 +319,7 @@
     }
     return _button;
 }
--(void)shouldShowDefaultButton:(BOOL)shouldShowDefaultButton
+-(void)setShouldShowDefaultButton:(BOOL)shouldShowDefaultButton
 {
     _shouldShowDefaultButton = shouldShowDefaultButton;
     if (_shouldShowDefaultButton ) {
