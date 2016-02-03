@@ -518,7 +518,8 @@
             _viewContainer = (UIView*)[UIApplication sharedApplication].keyWindow;
         }
         [self setupTextView:YES];
-        [self shouldShowDefaultButton:_shouldShowDefaultButton];
+        
+        [self setShouldShowDefaultButton:_shouldShowDefaultButton];
         [self setNeedsDisplay];
     }
 }
