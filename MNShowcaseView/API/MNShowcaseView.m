@@ -8,6 +8,8 @@
 
 #import "MNShowcaseView.h"
 
+CGFloat animationTime = 0.55;
+
 @implementation MNShowcaseItem
 -(instancetype)initWithView:(UIView *)view
 {
@@ -531,9 +533,18 @@
             [self removeFromSuperview];
         }
         self.frame = _viewContainer.bounds;
+        self.alpha = 0;
         [_viewContainer addSubview:self];
-        _isVisible = YES;
-        [self displayShowCaseView];
+        
+        [UIView animateWithDuration:animationTime/2 animations:^
+         {
+             self.alpha = 1;
+             
+         }completion:^(BOOL finished)
+         {
+             _isVisible = YES;
+             [self displayShowCaseView];
+         }];
     }else{
         NSLog(@"No MNShowcaseItem set to display view around it.");
     }
@@ -549,9 +560,42 @@
             [_delegate showcaseViewWillDismiss:self];
         }
         [self removeParentFrameObserver];
-        [self removeFromSuperview];
-        _isVisible = NO;
+        
+        [UIView animateWithDuration:animationTime/2 animations:^
+         {
+             self.alpha = 0;
+         } completion:^(BOOL finished)
+         {
+             [self removeFromSuperview];
+             _isVisible = NO;
+             
+         }];
     }
+}
+-(void) showMenu:(id)sender
+{
+    [UIView animateWithDuration:animationTime/2 animations:^
+     {
+         self.alpha = 1;
+         
+     }
+                     completion:^(BOOL finished)
+     {
+     }];
+    
+}
+
+-(void) dismissMenu:(id) sender
+
+{
+    [UIView animateWithDuration:animationTime/2 animations:^
+     {
+         self.alpha = 0;
+     } completion:^(BOOL finished)
+     {
+         [self removeFromSuperview];
+         
+     }];
 }
 #pragma mark - Utility methods
 
