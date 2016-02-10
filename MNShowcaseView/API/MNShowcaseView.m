@@ -43,11 +43,9 @@ CGFloat animationTime = 0.55;
 @property (nonatomic,strong) UITapGestureRecognizer *gestureBackgroundTapped;
 @property (nonatomic,strong) NSArray *arrayButtonConstraints;
 @property (nonatomic,strong) NSArray *arrayTextViewConstraints;
-//@property (nonatomic,strong) NSArray<UIView*> *arrayViews;
 @property (nonatomic,strong) NSArray<MNShowcaseItem*> *showcaseItems;
 @property (nonatomic, strong, readonly) UITextView *textViewDescription;
 @property (nonatomic, weak) UIImageView *imageView;
-//@property CGRect selectedRect;
 
 @end;
 
@@ -404,7 +402,7 @@ CGFloat animationTime = 0.55;
 }
 -(void)actionButtonClicked:(UIButton*)button{
     if (_currentIndexOfView==_showcaseItems.count-1) {
-        [self removeFromSuperview];
+        [self dismiss];
     }else{
         _currentIndexOfView++;
         _currentShowcaseItem = [_showcaseItems objectAtIndex:_currentIndexOfView];
@@ -526,25 +524,36 @@ CGFloat animationTime = 0.55;
     }
 }
 -(void)showOnView:(UIView *)viewContainer{
+    [self showOnView:viewContainer animated:YES];
+}
+-(void)showOnView:(UIView *)viewContainer animated:(BOOL)animated
+{
+    
     if (_currentShowcaseItem) {
         
         _viewContainer = viewContainer;
-        if (!self.superview) {
+        if (self.superview) {
+            [self removeParentFrameObserver];
             [self removeFromSuperview];
+            _isVisible = NO;
         }
         self.frame = _viewContainer.bounds;
         self.alpha = 0;
         [_viewContainer addSubview:self];
-        
-        [UIView animateWithDuration:animationTime/2 animations:^
-         {
-             self.alpha = 1;
-             
-         }completion:^(BOOL finished)
-         {
-             _isVisible = YES;
-             [self displayShowCaseView];
-         }];
+        if (animated) {
+            [UIView animateWithDuration:animationTime/2 animations:^
+             {
+                 self.alpha = 1;
+                 
+             }completion:^(BOOL finished)
+             {
+                 _isVisible = YES;
+                 [self displayShowCaseView];
+             }];
+        }else{
+            _isVisible = YES;
+            [self displayShowCaseView];
+        }
     }else{
         NSLog(@"No MNShowcaseItem set to display view around it.");
     }
@@ -554,48 +563,37 @@ CGFloat animationTime = 0.55;
     [self showOnView:container];
 }
 -(void)dismiss{
+    [self dismissAnimated:YES];
+}
+-(void)dismissAnimated:(BOOL)animated
+{
     if (self.superview)
     {
         if (_delegate && [_delegate respondsToSelector:@selector(showcaseViewWillDismiss:)]) {
             [_delegate showcaseViewWillDismiss:self];
         }
         [self removeParentFrameObserver];
-        
-        [UIView animateWithDuration:animationTime/2 animations:^
-         {
-             self.alpha = 0;
-         } completion:^(BOOL finished)
-         {
-             [self removeFromSuperview];
-             _isVisible = NO;
-             
-         }];
+        if (animated) {
+            [UIView animateWithDuration:animationTime/2 animations:^
+             {
+                 self.alpha = 0;
+             } completion:^(BOOL finished)
+             {
+                 [self removeFromSuperview];
+                 _isVisible = NO;
+                 if (_delegate && [_delegate respondsToSelector:@selector(showcaseViewDidDismiss:)]) {
+                     [_delegate showcaseViewDidDismiss:self];
+                 }
+             }];
+        }else{
+            [self removeFromSuperview];
+            _isVisible = NO;
+            if (_delegate && [_delegate respondsToSelector:@selector(showcaseViewDidDismiss:)]) {
+                [_delegate showcaseViewDidDismiss:self];
+            }
+            
+        }
     }
-}
--(void) showMenu:(id)sender
-{
-    [UIView animateWithDuration:animationTime/2 animations:^
-     {
-         self.alpha = 1;
-         
-     }
-                     completion:^(BOOL finished)
-     {
-     }];
-    
-}
-
--(void) dismissMenu:(id) sender
-
-{
-    [UIView animateWithDuration:animationTime/2 animations:^
-     {
-         self.alpha = 0;
-     } completion:^(BOOL finished)
-     {
-         [self removeFromSuperview];
-         
-     }];
 }
 #pragma mark - Utility methods
 

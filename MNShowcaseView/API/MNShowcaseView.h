@@ -175,6 +175,7 @@ typedef NS_ENUM(NSInteger, MNBOOL) {
 @optional
 -(void)showcaseView:(MNShowcaseView*)showcaseView willShowItem:(MNShowcaseItem*)showcaseItem;
 -(void)showcaseViewWillDismiss:(MNShowcaseView*)showcaseView;
+-(void)showcaseViewDidDismiss:(MNShowcaseView*)showcaseView;
 -(void)showcaseView:(MNShowcaseView *)showcaseView isTappedAtPoint:(CGPoint)point isInsideSelectedArea:(BOOL)isInside;
 
 @end
@@ -351,6 +352,12 @@ typedef NS_ENUM(NSInteger, MNBOOL) {
  */
 -(void)showOnView:(UIView*)viewContainer;
 /**
+ Show MNShowcaseView inside a particular view
+ @param viewContainer A view on which MNShowcaseView will be displayed.
+ @param animated Show showcaseview with or without animation based on this boolean
+ */
+-(void)showOnView:(UIView *)viewContainer animated:(BOOL)animated;
+/**
  Show MNShowcaseView inside main Window
  */
 -(void)showOnMainWindow;
@@ -358,5 +365,10 @@ typedef NS_ENUM(NSInteger, MNBOOL) {
  Dismiss current MNShowcaseView
  */
 -(void)dismiss;
+/**
+ Dismiss current MNShowcaseView
+ @param animated Hide showcaseview with or without animation based on this boolean
+ */
+-(void)dismissAnimated:(BOOL)animated;
 
 @end
