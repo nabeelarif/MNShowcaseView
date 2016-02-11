@@ -16,7 +16,6 @@
 		7DD32E971BCC24C000C57D7C /* MNShowcaseViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD32E961BCC24C000C57D7C /* MNShowcaseViewTests.m */; };
 		7DD32EA21BCC24C000C57D7C /* MNShowcaseViewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD32EA11BCC24C000C57D7C /* MNShowcaseViewUITests.m */; };
 		7DD32EB21BCC382C00C57D7C /* MNShowcaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD32EB11BCC382C00C57D7C /* MNShowcaseView.m */; };
-		7DD32EB51BCC467000C57D7C /* MNShowcaseLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD32EB41BCC467000C57D7C /* MNShowcaseLongPressGestureRecognizer.m */; };
 		7DD32EB81BCC476F00C57D7C /* UIView+MNShowcase.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD32EB71BCC476F00C57D7C /* UIView+MNShowcase.m */; };
 		F40F5DDF1C6132B900073E91 /* markhor.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F40F5DDE1C6132B900073E91 /* markhor.jpg */; };
 /* End PBXBuildFile section */
@@ -57,8 +56,6 @@
 		7DD32EA31BCC24C000C57D7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7DD32EB01BCC382C00C57D7C /* MNShowcaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNShowcaseView.h; sourceTree = "<group>"; };
 		7DD32EB11BCC382C00C57D7C /* MNShowcaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNShowcaseView.m; sourceTree = "<group>"; };
-		7DD32EB31BCC467000C57D7C /* MNShowcaseLongPressGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNShowcaseLongPressGestureRecognizer.h; sourceTree = "<group>"; };
-		7DD32EB41BCC467000C57D7C /* MNShowcaseLongPressGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNShowcaseLongPressGestureRecognizer.m; sourceTree = "<group>"; };
 		7DD32EB61BCC476F00C57D7C /* UIView+MNShowcase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MNShowcase.h"; sourceTree = "<group>"; };
 		7DD32EB71BCC476F00C57D7C /* UIView+MNShowcase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MNShowcase.m"; sourceTree = "<group>"; };
 		F40F5DDE1C6132B900073E91 /* markhor.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = markhor.jpg; sourceTree = "<group>"; };
@@ -158,8 +155,6 @@
 			children = (
 				7DD32EB01BCC382C00C57D7C /* MNShowcaseView.h */,
 				7DD32EB11BCC382C00C57D7C /* MNShowcaseView.m */,
-				7DD32EB31BCC467000C57D7C /* MNShowcaseLongPressGestureRecognizer.h */,
-				7DD32EB41BCC467000C57D7C /* MNShowcaseLongPressGestureRecognizer.m */,
 				7DD32EB61BCC476F00C57D7C /* UIView+MNShowcase.h */,
 				7DD32EB71BCC476F00C57D7C /* UIView+MNShowcase.m */,
 			);
@@ -298,7 +293,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7DD32EB51BCC467000C57D7C /* MNShowcaseLongPressGestureRecognizer.m in Sources */,
 				7DD32E841BCC24C000C57D7C /* ViewController.m in Sources */,
 				7DD32EB81BCC476F00C57D7C /* UIView+MNShowcase.m in Sources */,
 				7DD32E811BCC24C000C57D7C /* AppDelegate.m in Sources */,

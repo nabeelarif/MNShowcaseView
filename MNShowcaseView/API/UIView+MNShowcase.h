@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+@interface MNShowcaseLongPressGestureRecognizer : UILongPressGestureRecognizer
+@end
 
 @interface UIView (MNShowcase)
 -(void) registerForShowcaseView;

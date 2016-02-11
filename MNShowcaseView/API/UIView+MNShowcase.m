@@ -7,8 +7,10 @@
 //
 
 #import "UIView+MNShowcase.h"
-#import "MNShowcaseLongPressGestureRecognizer.h"
 #import "MNShowcaseView.h"
+
+@implementation MNShowcaseLongPressGestureRecognizer
+@end
 
 @implementation UIView (MNShowcase)
 
