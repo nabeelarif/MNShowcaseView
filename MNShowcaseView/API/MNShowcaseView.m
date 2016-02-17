@@ -300,10 +300,10 @@ CGFloat animationTime = 0.55;
 }
 -(void)showcaseViewTappedByGesture:(UITapGestureRecognizer*)sender
 {
-    if (_delegate && [_delegate respondsToSelector:@selector(showcaseView:isTappedAtPoint:isInsideSelectedArea:)]) {
+    if (_delegate && [_delegate respondsToSelector:@selector(showcaseView:showItem:isTappedAtPoint:isInsideSelectedArea:)]) {
         CGPoint point = [sender locationInView:self];
         BOOL isInside = CGRectContainsPoint(_currentShowcaseItem.selectedRect, point);
-        [_delegate showcaseView:self isTappedAtPoint:point isInsideSelectedArea:isInside];
+        [_delegate showcaseView:self showItem:_currentShowcaseItem isTappedAtPoint:point isInsideSelectedArea:isInside];
     }
     if (_shouldDismissOnBackgroundClick) {
         [self dismiss];
@@ -402,8 +402,8 @@ CGFloat animationTime = 0.55;
 }
 -(void)actionButtonClicked:(UIButton*)button{
     BOOL canContinue = YES;
-    if (_delegate && [_delegate respondsToSelector:@selector(showcaseView:canContinueActionOnButton:)]) {
-        canContinue = [_delegate showcaseView:self canContinueActionOnButton:button];
+    if (_delegate && [_delegate respondsToSelector:@selector(showcaseView:showItem:canContinueActionOnButton:)]) {
+        canContinue = [_delegate showcaseView:self showItem:_currentShowcaseItem canContinueActionOnButton:button];
     }
     if (canContinue) {
         if (_currentIndexOfView==_showcaseItems.count-1) {

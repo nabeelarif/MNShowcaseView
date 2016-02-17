@@ -176,13 +176,13 @@ typedef NS_ENUM(NSInteger, MNBOOL) {
 -(void)showcaseView:(MNShowcaseView*)showcaseView willShowItem:(MNShowcaseItem*)showcaseItem;
 -(void)showcaseViewWillDismiss:(MNShowcaseView*)showcaseView;
 -(void)showcaseViewDidDismiss:(MNShowcaseView*)showcaseView;
--(void)showcaseView:(MNShowcaseView *)showcaseView isTappedAtPoint:(CGPoint)point isInsideSelectedArea:(BOOL)isInside;
+-(void)showcaseView:(MNShowcaseView *)showcaseView showItem:(MNShowcaseItem*)showcaseItem  isTappedAtPoint:(CGPoint)point isInsideSelectedArea:(BOOL)isInside;
 /**
  Default button is clicked, 
  @return YES indicates button can carray on its task, i.e present next ShowcaseItem if there is 
  more or dismiss if there is no next item. NO indicates that button will not process its action further and will ignore click.
  */
--(BOOL)showcaseView:(MNShowcaseView *)showcaseView canContinueActionOnButton:(UIButton*)button;
+-(BOOL)showcaseView:(MNShowcaseView *)showcaseView showItem:(MNShowcaseItem*)showcaseItem canContinueActionOnButton:(UIButton*)button;
 
 @end
 /**
