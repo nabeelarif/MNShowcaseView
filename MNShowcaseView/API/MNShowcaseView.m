@@ -401,12 +401,18 @@ CGFloat animationTime = 0.55;
     }
 }
 -(void)actionButtonClicked:(UIButton*)button{
-    if (_currentIndexOfView==_showcaseItems.count-1) {
-        [self dismiss];
-    }else{
-        _currentIndexOfView++;
-        _currentShowcaseItem = [_showcaseItems objectAtIndex:_currentIndexOfView];
-        [self displayShowCaseView];
+    BOOL canContinue = YES;
+    if (_delegate && [_delegate respondsToSelector:@selector(showcaseView:canContinueActionOnButton:)]) {
+        canContinue = [_delegate showcaseView:self canContinueActionOnButton:button];
+    }
+    if (canContinue) {
+        if (_currentIndexOfView==_showcaseItems.count-1) {
+            [self dismiss];
+        }else{
+            _currentIndexOfView++;
+            _currentShowcaseItem = [_showcaseItems objectAtIndex:_currentIndexOfView];
+            [self displayShowCaseView];
+        }
     }
 }
 -(UITextView *)textViewDescription{
