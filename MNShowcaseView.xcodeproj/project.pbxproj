@@ -17,6 +17,7 @@
 		7DD32EA21BCC24C000C57D7C /* MNShowcaseViewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD32EA11BCC24C000C57D7C /* MNShowcaseViewUITests.m */; };
 		7DD32EB21BCC382C00C57D7C /* MNShowcaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD32EB11BCC382C00C57D7C /* MNShowcaseView.m */; };
 		7DD32EB81BCC476F00C57D7C /* UIView+MNShowcase.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD32EB71BCC476F00C57D7C /* UIView+MNShowcase.m */; };
+		7DF5DCDC1C7CCCF400C90321 /* MNShowcaseItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF5DCDB1C7CCCF400C90321 /* MNShowcaseItem.m */; };
 		F40F5DDF1C6132B900073E91 /* markhor.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F40F5DDE1C6132B900073E91 /* markhor.jpg */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,8 @@
 		7DD32EB11BCC382C00C57D7C /* MNShowcaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNShowcaseView.m; sourceTree = "<group>"; };
 		7DD32EB61BCC476F00C57D7C /* UIView+MNShowcase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MNShowcase.h"; sourceTree = "<group>"; };
 		7DD32EB71BCC476F00C57D7C /* UIView+MNShowcase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MNShowcase.m"; sourceTree = "<group>"; };
+		7DF5DCDA1C7CCCF400C90321 /* MNShowcaseItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNShowcaseItem.h; sourceTree = "<group>"; };
+		7DF5DCDB1C7CCCF400C90321 /* MNShowcaseItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNShowcaseItem.m; sourceTree = "<group>"; };
 		F40F5DDE1C6132B900073E91 /* markhor.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = markhor.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -157,6 +160,8 @@
 				7DD32EB11BCC382C00C57D7C /* MNShowcaseView.m */,
 				7DD32EB61BCC476F00C57D7C /* UIView+MNShowcase.h */,
 				7DD32EB71BCC476F00C57D7C /* UIView+MNShowcase.m */,
+				7DF5DCDA1C7CCCF400C90321 /* MNShowcaseItem.h */,
+				7DF5DCDB1C7CCCF400C90321 /* MNShowcaseItem.m */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -295,6 +300,7 @@
 			files = (
 				7DD32E841BCC24C000C57D7C /* ViewController.m in Sources */,
 				7DD32EB81BCC476F00C57D7C /* UIView+MNShowcase.m in Sources */,
+				7DF5DCDC1C7CCCF400C90321 /* MNShowcaseItem.m in Sources */,
 				7DD32E811BCC24C000C57D7C /* AppDelegate.m in Sources */,
 				7DD32EB21BCC382C00C57D7C /* MNShowcaseView.m in Sources */,
 				7DD32E7E1BCC24C000C57D7C /* main.m in Sources */,
