@@ -14,6 +14,6 @@ MNShowcaseView can highlight particular view of your app and describe about it a
 
   s.platform     = :ios, "8.0"
   s.source       = { :git => "https://github.com/nabeelarif100/MNShowcaseView.git", :tag => "#{s.version}" }
-  s.source_files  = "MNShowcaseView/API/MNShowcaseView.{h,m}"
+  s.source_files  = "MNShowcaseView/API/"
 
 end
