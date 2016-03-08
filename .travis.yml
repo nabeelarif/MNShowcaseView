@@ -1,3 +1,5 @@
 language: objective-c
 xcode_project: MNShowcaseView.xcodeproj # path to your xcodeproj folder
 xcode_scheme: MNShowcaseView
+
+script: xctool -project MNShowcaseView.xcodeproj -scheme MNShowcaseView build  CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
