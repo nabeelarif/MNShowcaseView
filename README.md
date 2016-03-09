@@ -1,5 +1,6 @@
-[![Build Status](https://travis-ci.org/nabeelarif100/MNShowcaseView.svg?branch=master)](https://travis-ci.org/nabeelarif100/MNShowcaseView)
 # MNShowcaseView
+[![Build Status](https://travis-ci.org/nabeelarif100/MNShowcaseView.svg?branch=master)](https://travis-ci.org/nabeelarif100/MNShowcaseView) [![Version Status](https://img.shields.io/cocoapods/v/MNShowcaseView.svg)][podLink] [![license MIT](https://img.shields.io/cocoapods/l/MNShowcaseView.svg)][mitLink] ![Platform](https://img.shields.io/cocoapods/p/MNShowcaseView.svg)
+
 MNShowcaseView can highlight particular view of your app and describe about it as a guided tutorial. It can be used as guided tutorial in your app where you can tell new user's how they can use different items in your app.
 
 
@@ -84,3 +85,7 @@ Muhammad Nabeel Arif
 ## License
 
 MNShowcaseView is available under the MIT license. See the LICENSE file for more info.
+
+
+[podLink]:https://cocoapods.org/pods/MNShowcaseView
+[mitLink]:http://opensource.org/licenses/MIT
