@@ -76,11 +76,11 @@ To handle and get events about MNShowcaseView you can implement follwoing protoc
 ```
 
 ## Todo
-1. Build category for UIView to present MNShowcaseView on long press on any view
-2. Testing
+- [x]  Build category for UIView to present MNShowcaseView on long press on any view
+- [ ]  Testing
 
 ## Author
-Muhammad Nabeel Arif
+[Muhammad Nabeel Arif](https://github.com/nabeelarif100)
 
 ## License
 
