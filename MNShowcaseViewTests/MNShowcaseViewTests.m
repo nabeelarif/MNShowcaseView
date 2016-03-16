@@ -7,7 +7,11 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "MNShowcaseView.h"
 
+@interface MNShowcaseView (hack)
+@property (nonatomic,strong) NSArray<MNShowcaseItem*> *showcaseItems;
+@end
 @interface MNShowcaseViewTests : XCTestCase
 
 @end
@@ -24,16 +28,12 @@
     [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
-}
-
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+- (void)testInitializeWithTitleAndDesc {
+    NSString *title = @"Title";
+    NSString *description = @"Description";
+    MNShowcaseView *showcase = [[MNShowcaseView alloc] initWithViewToFocus:[[UIView alloc] init] title:title description:description];
+    XCTAssertNotNil(showcase, @"ShowcaseView is initialized");
+    XCTAssertTrue(showcase.showcaseItems.count==1, @"There is one item in showcaseView");
 }
 
 @end
