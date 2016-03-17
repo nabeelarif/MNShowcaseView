@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D53F21F1C99F9B700FFD78A /* MNShowcaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD32EB11BCC382C00C57D7C /* MNShowcaseView.m */; };
+		7D53F2201C99F9BB00FFD78A /* UIView+MNShowcase.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD32EB71BCC476F00C57D7C /* UIView+MNShowcase.m */; };
+		7D53F2211C99F9BE00FFD78A /* MNShowcaseItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF5DCDB1C7CCCF400C90321 /* MNShowcaseItem.m */; };
+		7D53F2221C99F9C200FFD78A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD32E801BCC24C000C57D7C /* AppDelegate.m */; };
+		7D53F2231C99F9C500FFD78A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD32E831BCC24C000C57D7C /* ViewController.m */; };
+		7D53F2241C99F9CA00FFD78A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DD32E851BCC24C000C57D7C /* Main.storyboard */; };
+		7D53F2251C99F9D200FFD78A /* markhor.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F40F5DDE1C6132B900073E91 /* markhor.jpg */; };
+		7D53F2281C99F9E300FFD78A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DD32E8A1BCC24C000C57D7C /* LaunchScreen.storyboard */; };
 		7DD32E7E1BCC24C000C57D7C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD32E7D1BCC24C000C57D7C /* main.m */; };
 		7DD32E811BCC24C000C57D7C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD32E801BCC24C000C57D7C /* AppDelegate.m */; };
 		7DD32E841BCC24C000C57D7C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD32E831BCC24C000C57D7C /* ViewController.m */; };
@@ -281,6 +289,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D53F2281C99F9E300FFD78A /* LaunchScreen.storyboard in Resources */,
+				7D53F2251C99F9D200FFD78A /* markhor.jpg in Resources */,
+				7D53F2241C99F9CA00FFD78A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,7 +322,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D53F2231C99F9C500FFD78A /* ViewController.m in Sources */,
+				7D53F21F1C99F9B700FFD78A /* MNShowcaseView.m in Sources */,
 				7DD32E971BCC24C000C57D7C /* MNShowcaseViewTests.m in Sources */,
+				7D53F2211C99F9BE00FFD78A /* MNShowcaseItem.m in Sources */,
+				7D53F2201C99F9BB00FFD78A /* UIView+MNShowcase.m in Sources */,
+				7D53F2221C99F9C200FFD78A /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

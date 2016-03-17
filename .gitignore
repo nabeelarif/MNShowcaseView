@@ -51,3 +51,7 @@ Carthage/Build
 
 fastlane/report.xml
 fastlane/screenshots
+/CoreGraphics.gcda
+/CoreGraphics.gcno
+/ObjectiveC.gcda
+/ObjectiveC.gcno
